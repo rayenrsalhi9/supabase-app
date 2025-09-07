@@ -78,5 +78,6 @@
 
 .span a {
   color: var(--clr);
+  margin-left: .125em;
 }
 /* end of login page design */

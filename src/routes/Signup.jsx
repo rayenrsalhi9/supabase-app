@@ -1,7 +1,19 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
 export default function Signup() {
   return (
-    <h1>Signup page goes here</h1>
+    <form className="form">
+      <h2>Create an account</h2>
+      <span className="input-span">
+        <label htmlFor="email" className="label">Email</label>
+        <input type="email" name="email" id="email" placeholder="example@domain.com" />
+      </span>
+      <span className="input-span">
+        <label htmlFor="password" className="label">Password</label>
+        <input type="password" name="password" id="password" placeholder="********" />
+      </span>
+      <button className="submit-btn">Sign in</button>
+      <span className="span">Already have an account? <Link to="/">Sign in</Link></span>
+    </form>
   )
 }
