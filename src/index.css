@@ -6,3 +6,77 @@
   box-sizing: border-box;
   font-family: 'Manrope', sans-serif;
 }
+
+/* start of login page design */
+.form {
+  --bg-light: #efefef;
+  --bg-dark: #707070;
+  --clr: #58bc82;
+  --clr-alpha: #9c9c9c60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+  margin: 2em auto 0;
+}
+
+.form .input-span {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form input {
+  border-radius: 6px;
+  padding: 1rem 0.75rem;
+  width: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--clr-alpha);
+  outline: 2px solid var(--bg-dark);
+}
+
+.form input:focus {
+  outline: 2px solid var(--clr);
+}
+
+.label {
+  align-self: flex-start;
+  color: var(--clr);
+  font-weight: 600;
+}
+
+.form .submit-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem 0.75rem;
+  margin-top: .5em;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--bg-dark);
+  color: var(--bg-light);
+  text-align: center;
+  cursor: pointer;
+  transition: .6s ease;
+  font-weight: 600;
+}
+
+.form .submit-btn:hover {
+  background-color: var(--clr);
+  color: var(--bg-dark);
+}
+
+.span {
+  text-decoration: none;
+  color: var(--bg-dark);
+}
+
+.span a {
+  color: var(--clr);
+}
+/* end of login page design */
