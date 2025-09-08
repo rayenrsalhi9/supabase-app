@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState, useEffect, useActionState } from 'react';
 import { getSalesDeals } from '../utils';
 import {
   ResponsiveContainer,
@@ -11,9 +11,21 @@ import {
 
 export default function Dashboard() {
 
-  const [sales, setSales] = React.useState([])
+  const [sales, setSales] = useState([])
+  const [error, addNewDeal, isPending] = useActionState(
+    async (_, formData) => {
+      const name = formData.get('name')
+      const value = formData.get('value')
+      if (parseInt(value) === 0) {
+        return 'No 0 values'
+      }
+      console.log(name)
+      console.log(value)
+      return null
+    }, null
+  )
 
-  React.useEffect(() => {
+  useEffect(() => {
     getSalesDeals(setSales);
   }, [])
 
@@ -52,10 +64,11 @@ export default function Dashboard() {
             </ResponsiveContainer>
             <div className="dashboard-form-container">
               <h2>Add new deal sale</h2>
-              <form className='dashboard-form'>
+              {!isPending && error ? <p className='dashboard-form-error-msg'>{error}</p> : null}
+              <form className='dashboard-form' action={addNewDeal}>
                 <div className="form-field">
-                  <label htmlFor="dealName">Name:</label>
-                  <select name="dealName" id="dealName">
+                  <label htmlFor="name">Name:</label>
+                  <select name="name" id="name">
                     {sales.map(sale => (
                       <option key={sale.name} value={sale.name}>
                         {sale.name}
@@ -67,7 +80,7 @@ export default function Dashboard() {
                   <label htmlFor="value">Value:</label>
                   <input type="number" name='value' id='value' min={0} step={10} defaultValue={0} />
                 </div>
-                <button className="submit-btn">Add deal</button>
+                <button className="submit-btn" disabled={isPending}>Add deal</button>
               </form>
             </div>
           </div>

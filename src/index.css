@@ -168,4 +168,9 @@ body {
 .dashboard-form .submit-btn:hover {
   background-color: #229944;
 }
+
+.dashboard-container .dashboard-form-error-msg {
+  color: #e5383b;
+  text-align: center;
+}
 /* end of dashboard form */
