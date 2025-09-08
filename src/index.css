@@ -104,6 +104,19 @@ body {
   color: #2dc653;
   margin-left: .125em;
 }
+
+.form .auth-error-msg {
+  color: #e5383b;
+}
+
+.form input.input-error {
+  outline-color: #e5383b;
+}
+
+.form .submit-btn:disabled {
+  opacity: .8;
+  cursor: not-allowed;
+}
 /* end of login page design */
 
 /* start of header dashboard design */
