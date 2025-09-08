@@ -54,16 +54,18 @@ export default function Dashboard() {
               <h2>Add new deal sale</h2>
               <form className='dashboard-form'>
                 <div className="form-field">
-                  <label htmlFor="name">Name:</label>
-                  <select name="name" id="name">
-                    {
-                      sales.map(sale => <option value={sale.name}>{sale.name}</option>)
-                    }
+                  <label htmlFor="dealName">Name:</label>
+                  <select name="dealName" id="dealName">
+                    {sales.map(sale => (
+                      <option key={sale.name} value={sale.name}>
+                        {sale.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="form-field">
                   <label htmlFor="value">Value:</label>
-                  <input type="number" min={0} step={10} defaultValue={0} />
+                  <input type="number" name='value' id='value' min={0} step={10} defaultValue={0} />
                 </div>
                 <button className="submit-btn">Add deal</button>
               </form>
