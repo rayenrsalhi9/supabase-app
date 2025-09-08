@@ -28,7 +28,9 @@ export default function Signup() {
         <label htmlFor="password" className="label">Password</label>
         <input type="password" name="password" id="password" placeholder="********" className={!isPending && error ? "input-error" : ''} />
       </span>
-      <button className="submit-btn" disabled={isPending}>Sign in</button>
+      <button className="submit-btn" disabled={isPending}>
+        {isPending ? 'Signing up...' : 'Sign up'}
+      </button>
       <span className="span">Already have an account? <Link to="/">Sign in</Link></span>
     </form>
   )

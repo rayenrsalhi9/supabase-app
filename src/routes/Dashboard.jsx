@@ -80,7 +80,9 @@ export default function Dashboard() {
                   <label htmlFor="value">Value:</label>
                   <input type="number" name='value' id='value' min={0} step={10} defaultValue={0} />
                 </div>
-                <button className="submit-btn" disabled={isPending}>Add deal</button>
+                <button className="submit-btn" disabled={isPending}>
+                  {isPending ? 'Adding deal...' : 'Add deal'}
+                </button>
               </form>
             </div>
           </div>
