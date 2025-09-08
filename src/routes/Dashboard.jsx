@@ -24,7 +24,7 @@ export default function Dashboard() {
 
   const responsiveContainerStyle = {
     maxWidth: '600px',
-    margin: "1em auto"
+    margin: "2em auto"
   }
 
   const axisStyle = {
@@ -33,19 +33,24 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h2>Dashboard</h2>
+      <header className='dashboard-header'>
+        <h1>Sales Dashboard</h1>
+      </header>
       {
         sales
         ? (
-          <ResponsiveContainer width="100%" height={400} style={responsiveContainerStyle}>
-            <BarChart data={sales}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" style={axisStyle} />
-              <YAxis domain={[0, setMaxYAxis()]} style={axisStyle} />
-              <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, 'Sales']} />
-              <Bar dataKey="sum" fill="#2dc653" radius={[8, 8, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className='dashboard-container'>
+            <h2>Total sales this quarter</h2>
+            <ResponsiveContainer width="100%" height={400} style={responsiveContainerStyle}>
+              <BarChart data={sales}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" style={axisStyle} />
+                <YAxis domain={[0, setMaxYAxis()]} style={axisStyle} />
+                <Tooltip formatter={(value) => [`$${value.toLocaleString()}`, 'Sales']} />
+                <Bar dataKey="sum" fill="#2dc653" radius={[8, 8, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
         )
         : null
       }

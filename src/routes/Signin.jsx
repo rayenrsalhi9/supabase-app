@@ -3,7 +3,8 @@ import { Link } from "react-router-dom"
 export default function Signin() {
   return (
     <form className="form">
-      <h2>Welcome back!</h2>
+      <h1 className="form-title">Welcome back!</h1>
+      <p>Log in with your email and password</p>
       <span className="input-span">
         <label htmlFor="email" className="label">Email</label>
         <input type="email" name="email" id="email" placeholder="example@domain.com" />
