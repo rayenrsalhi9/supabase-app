@@ -40,7 +40,7 @@ export default function Dashboard() {
         sales
         ? (
           <div className='dashboard-container'>
-            <h2>Total sales this quarter</h2>
+            <h2>Total sales this quarter ($)</h2>
             <ResponsiveContainer width="100%" height={400} style={responsiveContainerStyle}>
               <BarChart data={sales}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -50,6 +50,24 @@ export default function Dashboard() {
                 <Bar dataKey="sum" fill="#2dc653" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
+            <div className="dashboard-form-container">
+              <h2>Add new deal sale</h2>
+              <form className='dashboard-form'>
+                <div className="form-field">
+                  <label htmlFor="name">Name:</label>
+                  <select name="name" id="name">
+                    {
+                      sales.map(sale => <option value={sale.name}>{sale.name}</option>)
+                    }
+                  </select>
+                </div>
+                <div className="form-field">
+                  <label htmlFor="value">Value:</label>
+                  <input type="number" min={0} step={10} defaultValue={0} />
+                </div>
+                <button className="submit-btn">Add deal</button>
+              </form>
+            </div>
           </div>
         )
         : null
