@@ -9,6 +9,7 @@ import {
   Bar,
 } from 'recharts';
 import Form from '../components/Form';
+import { supabase } from '../supabase';
 
 export default function Dashboard() {
 
@@ -16,6 +17,26 @@ export default function Dashboard() {
 
   useEffect(() => {
     getSalesDeals(setSales);
+
+    const channel = supabase
+      .channel('deals-change')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'sales_deals',
+        },
+        (payload) => {
+          console.log(`New sales deal: ${payload.new}`)
+          getSalesDeals(setSales)
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [])
 
   function setMaxYAxis() {
