@@ -154,6 +154,12 @@ body {
   border-radius: 6px;
 }
 
+.dashboard-form input:disabled,
+.dashboard-form select:disabled {
+  opacity: .8;
+  cursor: not-allowed;
+}
+
 .dashboard-form .input-error {
   border-color: #e5383b;
 }
@@ -174,6 +180,7 @@ body {
 }
 
 .dashboard-container .dashboard-form-error-msg {
+  margin-top: 1em;
   color: #e5383b;
   text-align: center;
 }

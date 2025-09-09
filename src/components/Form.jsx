@@ -1,17 +1,27 @@
 import { useActionState } from "react"
+import {supabase} from '../supabase'
 
 export default function Form({ sales }) {
 
     const [error, addNewDeal, isPending] = useActionState(
         async (_, formData) => {
-        const name = formData.get('name')
-        const value = formData.get('value')
-        if (parseInt(value) === 0) {
-            return 'No 0 values'
-        }
-        console.log(name)
-        console.log(value)
-        return null
+
+            const name = formData.get('name')
+            const value = formData.get('value')
+            
+            if (parseInt(value) === 0 || !name || !value) {
+                return 'Please enter a valid deal to add'
+            }
+
+            const {error: newDealError} = await supabase
+                .from('sales_deals')
+                .insert({
+                    name,
+                    value: parseInt(value)
+                })
+
+            if (newDealError) return newDealError.message
+
         }, null
     )
 
