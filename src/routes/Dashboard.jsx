@@ -9,6 +9,7 @@ import {
   Bar,
 } from 'recharts';
 import Form from '../components/Form';
+import Header from '../components/Header';
 import { supabase } from '../supabase';
 
 export default function Dashboard() {
@@ -55,9 +56,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <header className='dashboard-header'>
-        <h1>Sales Dashboard</h1>
-      </header>
+      <Header />
       {
         sales
         ? (
