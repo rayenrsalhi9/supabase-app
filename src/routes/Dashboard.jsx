@@ -64,23 +64,63 @@ export default function Dashboard() {
             </ResponsiveContainer>
             <div className="dashboard-form-container">
               <h2>Add new deal sale</h2>
-              {!isPending && error ? <p className='dashboard-form-error-msg'>{error}</p> : null}
-              <form className='dashboard-form' action={addNewDeal}>
+              {
+                !isPending && error 
+                ? <p className='dashboard-form-error-msg' role='alert'>{error}</p> 
+                : null
+              }
+              <form 
+                className='dashboard-form' 
+                action={addNewDeal} 
+                aria-label="Add new sales deal"
+                aria-describedby="form-description"
+              >
+
+                <div id="form-description" className="sr-only">
+                  Use this form to add a new sales deal. Select a sales rep and enter
+                  the amount.
+                </div>
+
                 <div className="form-field">
                   <label htmlFor="name">Name:</label>
-                  <select name="name" id="name">
-                    {sales.map(sale => (
-                      <option key={sale.name} value={sale.name}>
-                        {sale.name}
-                      </option>
-                    ))}
+                  <select 
+                    name="name" 
+                    id="name"
+                    defaultValue={sales?.[0]?.name || ''}
+                    aria-required="true"
+                    aria-invalid={error ? 'true' : 'false'}
+                    disabled={isPending}
+                  >
+                    {
+                      sales.map(sale => (
+                        <option key={sale.name} value={sale.name}>
+                          {sale.name}
+                        </option>
+                      ))
+                    }
                   </select>
                 </div>
                 <div className="form-field">
                   <label htmlFor="value">Value:</label>
-                  <input type="number" name='value' id='value' min={0} step={10} defaultValue={0} />
+                  <input 
+                    type="number" 
+                    name='value' 
+                    id='value' 
+                    min={0} 
+                    step={10} 
+                    defaultValue={0} 
+                    aria-required="true"
+                    aria-invalid={error ? 'true' : 'false'}
+                    aria-label="Deal amount in dollars"
+                    disabled={isPending}
+                  />
                 </div>
-                <button className="submit-btn" disabled={isPending}>
+                <button 
+                  type='submit'
+                  className="submit-btn" 
+                  disabled={isPending}
+                  aria-busy={isPending}
+                >
                   {isPending ? 'Adding deal...' : 'Add deal'}
                 </button>
               </form>

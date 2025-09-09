@@ -16,22 +16,70 @@ export default function Signup() {
   )
 
   return (
-    <form className="form" action={handleSubmit}>
+    <form 
+      className="form" 
+      action={handleSubmit}
+      aria-label="Sign up form"
+      aria-describedby="form-description"
+    >
+
+      <div id="form-description" className="sr-only">
+        Use this form to sign up for an account. Enter your email and
+        password.
+      </div>
+
       <h1 className="form-title">Create an account</h1>
       <p>Create an account to access your dashboard</p>
-      {!isPending && error ? <p className="auth-error-msg">{error}</p> : null}
+
+      {
+        !isPending && error 
+        ? <p id="auth-error-msg" role="alert" className="auth-error-msg">{error}</p> 
+        : null
+      }
+
       <span className="input-span">
         <label htmlFor="email" className="label">Email</label>
-        <input type="email" name="email" id="email" placeholder="example@domain.com" className={!isPending && error ? "input-error" : ''} />
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          placeholder="example@domain.com" 
+          className={!isPending && error ? "input-error" : ''} 
+          required
+          aria-required='true'
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'auth-error-msg' : undefined}
+          disabled={isPending}
+        />
       </span>
+
       <span className="input-span">
         <label htmlFor="password" className="label">Password</label>
-        <input type="password" name="password" id="password" placeholder="********" className={!isPending && error ? "input-error" : ''} />
+        <input 
+          type="password" 
+          name="password" 
+          id="password" 
+          placeholder="********" 
+          className={!isPending && error ? "input-error" : ''} 
+          required
+          aria-required='true'
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'auth-error-msg' : undefined}
+          disabled={isPending}
+        />
       </span>
-      <button className="submit-btn" disabled={isPending}>
+
+      <button 
+        className="submit-btn" 
+        disabled={isPending}
+        aria-busy={isPending}
+        type="submit"
+      >
         {isPending ? 'Signing up...' : 'Sign up'}
       </button>
+
       <span className="span">Already have an account? <Link to="/">Sign in</Link></span>
+      
     </form>
   )
 }
