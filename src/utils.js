@@ -15,3 +15,13 @@ export async function getSalesDeals(setSales) {
     setSales(data);
   }
 }
+
+export async function getInitialState(setSession) {
+  try {
+    const {data, error} = await supabase.auth.getSession()
+    if (error) throw error.message
+    setSession(data.session)
+  } catch(err) {
+    console.log(`An error occured: ${err}`)
+  }
+}

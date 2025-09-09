@@ -1,9 +1,18 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { getInitialState } from "../utils";
+import { supabase } from "../supabase";
 
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
-    const [session, _] = useState(undefined)
+    const [session, setSession] = useState(undefined)
+
+    useEffect(() => {
+        getInitialState(setSession)
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    }, [])
 
     return (
         <AuthContext.Provider value={{ session, AuthContext }}>
