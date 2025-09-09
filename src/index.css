@@ -154,6 +154,10 @@ body {
   border-radius: 6px;
 }
 
+.dashboard-form .input-error {
+  border-color: #e5383b;
+}
+
 .dashboard-form .submit-btn {
   background-color: #2dc653;
   color: #f5f5f5;
