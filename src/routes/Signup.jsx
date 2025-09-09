@@ -29,7 +29,7 @@ export default function Signup() {
       </div>
 
       <h1 className="form-title">Create an account</h1>
-      <p>Create an account to access your dashboard</p>
+      <p>Create an account and start tracking your sales</p>
 
       {
         !isPending && error 

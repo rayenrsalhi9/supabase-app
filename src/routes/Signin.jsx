@@ -29,7 +29,7 @@ export default function Signin() {
       </div>
 
       <h1 className="form-title">Welcome back!</h1>
-      <p>Log in with your email and password</p>
+      <p>Log in and continue where you left off</p>
 
       {
         !isPending && error 
