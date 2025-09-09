@@ -1,16 +1,28 @@
 import { useActionState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../context/AuthContext"
 
 export default function Signup() {
 
+  const {setSession, signUserUp} = useAuth()
+  const navigate = useNavigate()
+
   const [error, handleSubmit, isPending] = useActionState(
     async(_, formData) => {
+
       const email = formData.get('email')
       const password = formData.get('password')
-      if (email === 'rayen@me.com') {
-        return 'Email already existing'
-      } 
-      console.log(email)
+
+      const {success, data, error: signUpError} = await signUserUp(email, password)
+
+      if (signUpError) return signUpError
+
+      if (success && data) {
+        setSession(data.session)
+        navigate('/dashboard')
+        return null
+      }
+      
       return null
     }, null
   )

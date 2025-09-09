@@ -52,3 +52,14 @@ export async function signUserOut() {
     return {success: false, error: 'An unexpected error occured, try again later'}
   }
 }
+
+export async function signUserUp(email, password) {
+  try {
+    const {data, error} = await supabase.auth.signUp({email, password})
+    if (error) return {success: false, error: error.message}
+    return {success: true, data}
+  } catch(err) {
+    console.log('error during sign up: ', err)
+    return {success: false, error: 'An unexpected error occured, try again later'}
+  }
+}
