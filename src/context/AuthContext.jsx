@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getInitialState } from "../utils";
+import { getInitialState, signUserIn } from "../utils";
 import { supabase } from "../supabase";
 
 const AuthContext = createContext()
@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ session, AuthContext }}>
+        <AuthContext.Provider value={{ session, signUserIn }}>
             {children}
         </AuthContext.Provider>
     )

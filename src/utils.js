@@ -25,3 +25,17 @@ export async function getInitialState(setSession) {
     console.log(`An error occured: ${err}`)
   }
 }
+
+export async function signUserIn(email, password, navigate, setSession) {
+  try {
+    const {data, error} = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    if (error) return error.message
+    setSession(data.session)
+    navigate('/dashboard')
+  } catch(err) {
+    console.log(`An error occured: ${err}`)
+  }
+}
