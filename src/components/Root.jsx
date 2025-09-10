@@ -1,6 +1,5 @@
 import {useAuth} from '../context/AuthContext'
-import Signin from '../routes/Signin'
-import Dashboard from '../routes/Dashboard'
+import { Navigate } from 'react-router-dom'
 
 export default function Root() {
 
@@ -8,5 +7,6 @@ export default function Root() {
 
     if (session === undefined) return <div>Loading...</div>
 
-    return session ? <Dashboard /> : <Signin />
+    return session ? <Navigate to='/dashboard'/> : <Navigate to='/signin'/>
+
 }
