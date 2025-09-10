@@ -13,14 +13,9 @@ export default function Signup() {
       const name = formData.get('name')
       const email = formData.get('email')
       const password = formData.get('password')
-      const role = formData.get('role')
+      const accountType = formData.get('account-type')
 
-      console.log(name)
-      console.log(email)
-      console.log(password)
-      console.log(role)
-
-      /* const {success, data, error: signUpError} = await signUserUp(email, password)
+      const {success, data, error: signUpError} = await signUserUp(name, email, password, accountType)
 
       if (signUpError) return signUpError
 
@@ -28,7 +23,7 @@ export default function Signup() {
         setSession(data.session)
         navigate('/dashboard')
         return null
-      } */
+      }
       
       return null
     }, null
@@ -107,11 +102,11 @@ export default function Signup() {
       <fieldset className="role-fieldset">
         <legend>Specify your role</legend>
         <label htmlFor="admin">
-          <input type="radio" name="role" id="admin" value="admin" />
+          <input type="radio" name="account-type" id="admin" value="admin" />
           Admin
         </label>
         <label htmlFor="sales_rep">
-          <input type="radio" name="role" id="sales_rep" value="sales_rep" defaultChecked />
+          <input type="radio" name="account-type" id="sales_rep" value="sales_rep" defaultChecked />
           Sales rep
         </label>
       </fieldset>

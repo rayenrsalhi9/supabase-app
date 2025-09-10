@@ -53,9 +53,17 @@ export async function signUserOut() {
   }
 }
 
-export async function signUserUp(email, password) {
+export async function signUserUp(name, email, password, accountType) {
   try {
-    const {data, error} = await supabase.auth.signUp({email, password})
+    const {data, error} = await supabase.auth.signUp({
+      email, password,
+      options: {
+        data: {
+          name,
+          account_type: accountType
+        }
+      }
+    })
     if (error) return {success: false, error: error.message}
     return {success: true, data}
   } catch(err) {
