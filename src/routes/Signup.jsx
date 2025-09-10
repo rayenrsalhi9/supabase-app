@@ -10,10 +10,17 @@ export default function Signup() {
   const [error, handleSubmit, isPending] = useActionState(
     async(_, formData) => {
 
+      const name = formData.get('name')
       const email = formData.get('email')
       const password = formData.get('password')
+      const role = formData.get('role')
 
-      const {success, data, error: signUpError} = await signUserUp(email, password)
+      console.log(name)
+      console.log(email)
+      console.log(password)
+      console.log(role)
+
+      /* const {success, data, error: signUpError} = await signUserUp(email, password)
 
       if (signUpError) return signUpError
 
@@ -21,7 +28,7 @@ export default function Signup() {
         setSession(data.session)
         navigate('/dashboard')
         return null
-      }
+      } */
       
       return null
     }, null
@@ -50,12 +57,28 @@ export default function Signup() {
       }
 
       <span className="input-span">
+        <label htmlFor="name" className="label">Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          id="name" 
+          placeholder="e.g. John Doe" 
+          className={!isPending && error ? "input-error" : ''} 
+          required
+           aria-required='true'
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'auth-error-msg' : undefined}
+          disabled={isPending}
+        />
+      </span>
+
+      <span className="input-span">
         <label htmlFor="email" className="label">Email</label>
         <input 
           type="email" 
           name="email" 
           id="email" 
-          placeholder="example@domain.com" 
+          placeholder="e.g. example@domain.com" 
           className={!isPending && error ? "input-error" : ''} 
           required
           aria-required='true'
@@ -80,6 +103,18 @@ export default function Signup() {
           disabled={isPending}
         />
       </span>
+
+      <fieldset className="role-fieldset">
+        <legend>Specify your role</legend>
+        <label htmlFor="admin">
+          <input type="radio" name="role" id="admin" value="admin" />
+          Admin
+        </label>
+        <label htmlFor="sales_rep">
+          <input type="radio" name="role" id="sales_rep" value="sales_rep" defaultChecked />
+          Sales rep
+        </label>
+      </fieldset>
 
       <button 
         className="submit-btn" 
