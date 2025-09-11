@@ -33,11 +33,13 @@ export default function Form() {
     )
 
     const generateOptions = () => {
-        return users.map(user => (
-        <option key={user.id} value={user.name}>
-            {user.name}
-        </option>
-        ))
+        return users
+            .filter(user => user.account_type === 'sales_rep')
+            .map(user => (
+                <option key={user.id} value={user.name}>
+                    {user.name}
+                </option>
+            ))
     }
 
     const currentUser = users.find(user => user.id === session?.user?.id )
