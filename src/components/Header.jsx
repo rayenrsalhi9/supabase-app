@@ -12,6 +12,11 @@ export default function Header() {
 
     const currentUser = users.find(user => user.id === session?.user?.id)
 
+    const accountType = {
+        'admin': 'Admin',
+        'sales_rep': 'Sales rep'
+    }
+
     const handleSignOut = async () => {
         const {success, error: signOutError} = await signUserOut()
         if (signOutError) return setError(signOutError)
@@ -29,11 +34,15 @@ export default function Header() {
                         <p className="user-email">
                             <FaRegEnvelope />
                             {session?.user?.email}
-                        </p>
-                        <p className="user-role">
-                            <FaRegUserCircle />
-                            {`${currentUser?.name} (${currentUser?.account_type})`}
-                        </p>
+                        </p> 
+                        {
+                            currentUser
+                            ? <p className="user-role">
+                                <FaRegUserCircle />
+                                {`${currentUser?.name} (${accountType[currentUser?.account_type]})`}
+                            </p>
+                            : null
+                        }
                     </div>
                     <div className="signout-section">
                         <button className="signout-btn" onClick={handleSignOut}>
