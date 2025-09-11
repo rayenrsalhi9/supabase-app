@@ -13,11 +13,19 @@ export const AuthContextProvider = ({ children }) => {
         supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
         })
-        getUsers(setUsers)
     }, [])
 
+    useEffect(() => {
+        if (!session) return 
+        getUsers(setUsers)
+    }, [session])
+
     return (
-        <AuthContext.Provider value={{ session, setSession, signUserIn, signUserOut, signUserUp }}>
+        <AuthContext.Provider value={{ 
+            session, setSession, 
+            signUserIn, signUserOut, signUserUp,
+            users 
+        }}>
             {children}
         </AuthContext.Provider>
     )
