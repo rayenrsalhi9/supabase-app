@@ -4,7 +4,7 @@ import {useAuth} from '../context/AuthContext'
 
 export default function Form() {
 
-    const {users} = useAuth()
+    const {users, session} = useAuth()
 
     const [error, addNewDeal, isPending] = useActionState(
         async (_, formData) => {
@@ -40,6 +40,46 @@ export default function Form() {
         ))
     }
 
+    const currentUser = users.find(user => user.id === session?.user?.id )
+
+    const displayAppropriateField = () => {
+        return currentUser?.account_type === 'admin' 
+        ? (
+            <div className="form-field">
+                <label htmlFor="name">Name:</label>
+                <select 
+                    name="name" 
+                    id="name"
+                    className={error ? 'input-error' : ''}
+                    defaultValue={users?.[0]?.name || ''}
+                    aria-required="true"
+                    aria-invalid={error ? 'true' : 'false'}
+                    disabled={isPending}
+                >
+                {generateOptions()}
+                </select>
+            </div>
+            )
+        : (
+            <div className="form-field">
+                <label htmlFor="name">Name:</label>
+                <input 
+                    type="text" 
+                    name='name' 
+                    id='name' 
+                    className={error ? 'input-error' : ''}
+                    value={currentUser?.name || ''}
+                    aria-required="true"
+                    aria-invalid={error ? 'true' : 'false'}
+                    disabled={isPending}
+                    readOnly
+                    aria-readonly='true'
+                    aria-label="Sales rep representative name"
+                />
+            </div>
+        )
+    }  
+
     return (
         <div className="dashboard-form-container">
             <h2>Add new deal sale</h2>
@@ -60,20 +100,8 @@ export default function Form() {
                 the amount.
             </div>
 
-            <div className="form-field">
-                <label htmlFor="name">Name:</label>
-                <select 
-                    name="name" 
-                    id="name"
-                    className={error ? 'input-error' : ''}
-                    defaultValue={users?.[0]?.name || ''}
-                    aria-required="true"
-                    aria-invalid={error ? 'true' : 'false'}
-                    disabled={isPending}
-                >
-                {generateOptions()}
-                </select>
-            </div>
+            {displayAppropriateField()}
+
             <div className="form-field">
                 <label htmlFor="value">Value:</label>
                 <input 
