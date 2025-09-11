@@ -1,18 +1,37 @@
 import { supabase } from "./supabase";
 
 export async function getSalesDeals(setSales) {
-  const { data, error } = await supabase
-  .from('sales_deals')
-  .select(
-    `
-    name,
-    value.sum()
-    `,
-  )
-  if (error) {
-    console.log(error);
-  } else {
+  try {
+    const { data, error } = await supabase
+    .from('sales_deals')
+    .select(
+      `
+      name,
+      value.sum()
+      `,
+    )
+    if (error) throw error.message
     setSales(data);
+  } catch(err) {
+    console.log(`An error occured when fetching deals: ${err}`)
+  }
+}
+
+export async function getUsers(setUsers) {
+  try {
+    const { data, error } = await supabase
+      .from('user_profiles')
+      .select(
+        `
+        id,
+        name,
+        account_type
+        `,
+      )
+    if (error) throw error.message
+    setUsers(data);
+  } catch(err) {
+    console.log(`An error occured when fetching users: ${err}`)
   }
 }
 

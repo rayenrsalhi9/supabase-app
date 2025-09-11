@@ -1,17 +1,19 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { getInitialState, signUserIn, signUserOut, signUserUp } from "../utils";
+import { getInitialState, signUserIn, signUserOut, signUserUp, getUsers } from "../utils";
 import { supabase } from "../supabase";
 
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
     const [session, setSession] = useState(undefined)
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         getInitialState(setSession)
         supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
         })
+        getUsers(setUsers)
     }, [])
 
     return (
