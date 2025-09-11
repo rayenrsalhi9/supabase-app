@@ -69,7 +69,7 @@ export default function Dashboard() {
               </BarChart>
             </ResponsiveContainer>
 
-            <Form sales={sales} />
+            <Form />
             
           </div>
         )

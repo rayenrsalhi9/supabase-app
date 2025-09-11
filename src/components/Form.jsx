@@ -1,7 +1,10 @@
 import { useActionState } from "react"
 import {supabase} from '../supabase'
+import {useAuth} from '../context/AuthContext'
 
-export default function Form({ sales }) {
+export default function Form() {
+
+    const {users} = useAuth()
 
     const [error, addNewDeal, isPending] = useActionState(
         async (_, formData) => {
@@ -24,6 +27,14 @@ export default function Form({ sales }) {
 
         }, null
     )
+
+    const generateOptions = () => {
+        return users.map(user => (
+        <option key={user.name} value={user.name}>
+            {user.name}
+        </option>
+        ))
+    }
 
     return (
         <div className="dashboard-form-container">
@@ -51,18 +62,12 @@ export default function Form({ sales }) {
                     name="name" 
                     id="name"
                     className={error ? 'input-error' : ''}
-                    defaultValue={sales?.[0]?.name || ''}
+                    defaultValue={users?.[0]?.name || ''}
                     aria-required="true"
                     aria-invalid={error ? 'true' : 'false'}
                     disabled={isPending}
                 >
-                {
-                    sales.map(sale => (
-                    <option key={sale.name} value={sale.name}>
-                        {sale.name}
-                    </option>
-                    ))
-                }
+                {generateOptions()}
                 </select>
             </div>
             <div className="form-field">
