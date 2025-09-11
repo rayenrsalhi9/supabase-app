@@ -30,7 +30,7 @@ export default function Form() {
 
     const generateOptions = () => {
         return users.map(user => (
-        <option key={user.name} value={user.name}>
+        <option key={user.id} value={user.name}>
             {user.name}
         </option>
         ))
