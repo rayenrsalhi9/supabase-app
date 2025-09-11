@@ -16,14 +16,18 @@ export default function Form() {
                 return 'Please enter a valid deal to add'
             }
 
+            const userId = users.find(user => user.name === name).id
+
             const {error: newDealError} = await supabase
                 .from('sales_deals')
                 .insert({
-                    name,
+                    user_id: userId,
                     value: parseInt(value)
                 })
 
             if (newDealError) return newDealError.message
+
+            return null
 
         }, null
     )
