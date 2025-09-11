@@ -105,7 +105,7 @@ export default function Form() {
             {displayAppropriateField()}
 
             <div className="form-field">
-                <label htmlFor="value">Value:</label>
+                <label htmlFor="value">Value: $</label>
                 <input 
                     type="number" 
                     name='value' 

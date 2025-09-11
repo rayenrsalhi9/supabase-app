@@ -3,13 +3,15 @@ import { supabase } from "./supabase";
 export async function getSalesDeals(setSales) {
   try {
     const { data, error } = await supabase
-    .from('sales_deals')
-    .select(
-      `
-      name,
-      value.sum()
-      `,
-    )
+      .from('sales_deals')
+      .select(
+        `
+        value.sum(),
+        ...user_profiles!inner(
+          name
+        )
+        `,
+      );
     if (error) throw error.message
     setSales(data);
   } catch(err) {
